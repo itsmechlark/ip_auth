@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/itsmechlark/ip_auth.svg)](https://travis-ci.org/itsmechlark/ip_auth)
