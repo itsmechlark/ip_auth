@@ -1,0 +1,12 @@
+<h2>Log in</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), method: :post) do |f| %>
+    <%= f.hidden_field :email %>
+    <div class="form-inputs">
+      <%= recaptcha_tags %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Log in" %>
+    </div>
+<% end %>

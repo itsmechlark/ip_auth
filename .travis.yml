@@ -1,0 +1,36 @@
+language: ruby
+
+rvm:
+  - 1.9.3
+  - 2.0.0
+  - 2.1
+  - 2.2
+
+gemfile:
+  - gemfiles/Gemfile.rails-edge
+  - gemfiles/Gemfile.rails-4.2-stable
+  - gemfiles/Gemfile.rails-4.1-stable
+  - gemfiles/Gemfile.rails-4.0-stable
+  - gemfiles/Gemfile.rails-3.2-stable
+  - Gemfile
+
+sudo: false
+
+cache: bundler
+
+matrix:
+  exclude:
+    - rvm: 2.2
+      gemfile: gemfiles/Gemfile.rails-3.2-stable
+  allow_failures:
+    - gemfile: gemfiles/Gemfile.rails-edge
+
+env:
+  matrix:
+    - DEVISE_ORM=active_record
+
+before_install: "[ -f ${BUNDLE_GEMFILE}.lock ] && rm ${BUNDLE_GEMFILE}.lock || true"
+
+before_script: "bundle update"
+
+script: "bundle exec rake test"
