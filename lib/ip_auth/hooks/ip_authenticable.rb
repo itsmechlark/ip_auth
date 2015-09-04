@@ -6,10 +6,8 @@ Warden::Manager.after_set_user only: :fetch do |record, warden, options|
 
   # Skip when current authenticated user isn't authenticated using
   # `ip_authenticable` strategy.
-  return unless session['ip_authentication']
-
   env = warden.request.env
-  if record.respond_to?(:valid_for_ip_authentication?) && warden.authenticated?(scope) && options[:store] != false && !env['devise.skip_ip_authentication']
+  if session['ip_authentication'] && record.respond_to?(:valid_for_ip_authentication?) && warden.authenticated?(scope) && options[:store] != false && !env['devise.skip_ip_authentication']
     unless record.valid_for_ip_authentication?(warden.request.remote_ip)
       warden.logout(scope)
       throw :warden, scope: scope, message: :unauthenticated

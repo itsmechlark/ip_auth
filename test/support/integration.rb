@@ -15,7 +15,7 @@ class ActionDispatch::IntegrationTest
   def sign_in_as_user(options = {}, &_block)
     user = create_user(options)
     get_with_option options[:visit], new_user_session_path
-    fill_in 'email', with: options[:email] || 'user@test.com'
+    fill_in 'email', with: options[:email] || user.email
     fill_in 'password', with: options[:password] || '12345678'
     check 'remember me' if options[:remember_me] == true
     yield if block_given?

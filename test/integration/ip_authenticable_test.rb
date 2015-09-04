@@ -8,6 +8,12 @@ class IpAuthenticableTest < ActionDispatch::IntegrationTest
     stubs_with_default_ip
   end
 
+  test 'sign in without ip' do
+    sign_in_as_user
+
+    assert warden.authenticated?(:user)
+  end
+
   test 'authenticate with ip' do
     sign_in_via_ip_as_user
 
