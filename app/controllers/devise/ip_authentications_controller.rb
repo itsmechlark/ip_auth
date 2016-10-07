@@ -1,6 +1,6 @@
 module Devise
   class IpAuthenticationsController < ::DeviseController
-    prepend_before_filter :require_no_authentication, only: [:new]
+    prepend_before_action :require_no_authentication, only: [:new]
 
     def new
       self.resource = resources_for_remote_ip
